@@ -83,17 +83,17 @@ abstract class BeautifulPopupTemplate extends StatefulWidget {
     final illustration = options.illustration;
     return illustration == null
         ? Image.asset(
-            illustrationKey,
-            width: percentW(100),
-            height: percentH(100),
-            fit: BoxFit.fill,
-          )
+      illustrationKey,
+      width: percentW(100),
+      height: percentH(100),
+      fit: BoxFit.fill,
+    )
         : CustomPaint(
-            size: Size(percentW(100), percentH(100)),
-            painter: ImageEditor(
-              image: illustration,
-            ),
-          );
+      size: Size(percentW(100), percentH(100)),
+      painter: ImageEditor(
+        image: illustration,
+      ),
+    );
   }
 
   Widget get title {
@@ -127,12 +127,12 @@ abstract class BeautifulPopupTemplate extends StatefulWidget {
   Widget get content {
     return options.content is String
         ? AutoSizeText(
-            options.content,
-            minFontSize: 10,
-            style: TextStyle(
-              color: Colors.black87,
-            ),
-          )
+      options.content,
+      minFontSize: 10,
+      style: TextStyle(
+        color: Colors.black87,
+      ),
+    )
         : options.content;
   }
 
@@ -147,13 +147,13 @@ abstract class BeautifulPopupTemplate extends StatefulWidget {
       children: actionsList
           .map(
             (button) => Flexible(
-              flex: 1,
-              child: Padding(
-                padding: EdgeInsets.symmetric(horizontal: 5),
-                child: button,
-              ),
-            ),
-          )
+          flex: 1,
+          child: Padding(
+            padding: EdgeInsets.symmetric(horizontal: 5),
+            child: button,
+          ),
+        ),
+      )
           .toList(),
     );
   }
@@ -172,7 +172,7 @@ abstract class BeautifulPopupTemplate extends StatefulWidget {
       ]);
       final double elevation = (outline || flat) ? 0 : 2;
       final labelColor =
-          (outline || flat) ? primaryColor : Colors.white.withOpacity(0.95);
+      (outline || flat) ? primaryColor : Colors.white.withOpacity(0.95);
       final decoration = BoxDecoration(
         gradient: (outline || flat) ? null : gradient,
         borderRadius: BorderRadius.all(Radius.circular(80.0)),
@@ -182,12 +182,19 @@ abstract class BeautifulPopupTemplate extends StatefulWidget {
         ),
       );
       final minHeight = 40.0 - (outline ? 2 : 0);
-      return RaisedButton(
-        color: Colors.transparent,
-        elevation: elevation,
-        highlightElevation: 0,
-        splashColor: Colors.transparent,
+      return ElevatedButton(
+        onPressed: onPressed,
+        style: ButtonStyle(
+          elevation: MaterialStateProperty.all(elevation),
+          shape: MaterialStateProperty.all(
+            RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(50),
+            ),
+          ),
+          padding: MaterialStateProperty.all(EdgeInsets.all(0)),
+        ),
         child: Ink(
+          color: Colors.transparent,
           decoration: decoration,
           child: Container(
             constraints: BoxConstraints(
@@ -203,12 +210,8 @@ abstract class BeautifulPopupTemplate extends StatefulWidget {
             ),
           ),
         ),
-        padding: EdgeInsets.all(0),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(50),
-        ),
-        onPressed: onPressed,
       );
+
     };
   }
 
@@ -226,12 +229,12 @@ class BeautifulPopupTemplateState extends State<BeautifulPopupTemplate> {
       closeEntry = OverlayEntry(
         builder: (ctx) {
           final bottom = (MediaQuery.of(context).size.height -
-                      widget.height -
-                      widget.bodyMargin * 2) /
-                  4 -
+              widget.height -
+              widget.bodyMargin * 2) /
+              4 -
               20;
           return Stack(
-            overflow: Overflow.visible,
+            clipBehavior: Clip.none,
             children: <Widget>[
               Positioned(
                 child: Container(
@@ -264,7 +267,7 @@ class BeautifulPopupTemplateState extends State<BeautifulPopupTemplate> {
             height: widget.height,
             width: widget.width,
             child: Stack(
-              overflow: Overflow.visible,
+              clipBehavior: Clip.none,
               children: widget.layout,
             ),
           ),

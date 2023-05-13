@@ -52,13 +52,13 @@ class TemplateRedPacket extends BeautifulPopupTemplate {
   Widget get content {
     return options.content is String
         ? AutoSizeText(
-            options.content,
-            minFontSize:
-                Theme.of(options.context).textTheme.headline6?.fontSize ?? 12,
-            style: TextStyle(
-              color: Colors.white.withOpacity(0.95),
-            ),
-          )
+      options.content,
+      minFontSize:
+      Theme.of(options.context).textTheme.headline6?.fontSize ?? 12,
+      style: TextStyle(
+        color: Colors.white.withOpacity(0.95),
+      ),
+    )
         : options.content;
   }
 
@@ -77,7 +77,7 @@ class TemplateRedPacket extends BeautifulPopupTemplate {
       ]);
       final double elevation = (outline || flat) ? 0 : 2;
       final labelColor =
-          (outline || flat) ? primaryColor : Colors.white.withOpacity(0.95);
+      (outline || flat) ? primaryColor : Colors.white.withOpacity(0.95);
       final decoration = BoxDecoration(
         gradient: (outline || flat) ? null : gradient,
         borderRadius: BorderRadius.all(Radius.circular(80.0)),
@@ -87,12 +87,19 @@ class TemplateRedPacket extends BeautifulPopupTemplate {
         ),
       );
       final minHeight = 40.0 - (outline ? 2 : 0);
-      return RaisedButton(
-        color: Colors.transparent,
-        elevation: elevation,
-        highlightElevation: 0,
-        splashColor: Colors.transparent,
+      return ElevatedButton(
+        onPressed: onPressed,
+        style: ButtonStyle(
+          elevation: MaterialStateProperty.all(elevation),
+          shape: MaterialStateProperty.all(
+            RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(50),
+            ),
+          ),
+          padding: MaterialStateProperty.all(EdgeInsets.all(0)),
+        ),
         child: Ink(
+          color: Colors.transparent,
           decoration: decoration,
           child: Container(
             constraints: BoxConstraints(
@@ -109,12 +116,8 @@ class TemplateRedPacket extends BeautifulPopupTemplate {
             ),
           ),
         ),
-        padding: EdgeInsets.all(0),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(50),
-        ),
-        onPressed: onPressed,
       );
+
     };
   }
 
