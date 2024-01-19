@@ -13,7 +13,7 @@ class TemplateCoin extends BeautifulPopupTemplate {
   @override
   Color get primaryColor => options.primaryColor ?? Color(0xffff8269);
   @override
-  final maxWidth = 400;
+  var maxWidth = 400;
   @override
   final maxHeight = 586;
   @override

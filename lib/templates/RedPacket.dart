@@ -99,7 +99,7 @@ class TemplateRedPacket extends BeautifulPopupTemplate {
           padding: MaterialStateProperty.all(EdgeInsets.all(0)),
         ),
         child: Ink(
-          color: Colors.transparent,
+          // color: Colors.transparent,
           decoration: decoration,
           child: Container(
             constraints: BoxConstraints(

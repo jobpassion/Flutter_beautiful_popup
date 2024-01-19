@@ -22,8 +22,10 @@ abstract class BeautifulPopupTemplate extends StatefulWidget {
   State<StatefulWidget> createState() => state;
 
   Size get size {
-    double screenWidth = MediaQuery.of(options.context).size.width;
-    double screenHeight = MediaQuery.of(options.context).size.height;
+    double screenWidth = WidgetsBinding.instance.window.physicalSize.width;
+    double screenHeight = WidgetsBinding.instance.window.physicalSize.height;
+    // double screenWidth = MediaQuery.of(options.context).size.width;
+    // double screenHeight = MediaQuery.of(options.context).size.height;
     double height = screenHeight > maxHeight ? maxHeight : screenHeight;
     double width;
     height = height - bodyMargin * 2;
@@ -194,7 +196,7 @@ abstract class BeautifulPopupTemplate extends StatefulWidget {
           padding: MaterialStateProperty.all(EdgeInsets.all(0)),
         ),
         child: Ink(
-          color: Colors.transparent,
+          // color: Colors.transparent,
           decoration: decoration,
           child: Container(
             constraints: BoxConstraints(
@@ -225,33 +227,33 @@ class BeautifulPopupTemplateState extends State<BeautifulPopupTemplate> {
     super.initState();
 
     // Display close button
-    Future.delayed(Duration.zero, () {
-      closeEntry = OverlayEntry(
-        builder: (ctx) {
-          final bottom = (MediaQuery.of(context).size.height -
-              widget.height -
-              widget.bodyMargin * 2) /
-              4 -
-              20;
-          return Stack(
-            clipBehavior: Clip.none,
-            children: <Widget>[
-              Positioned(
-                child: Container(
-                  alignment: Alignment.center,
-                  child: widget.options.close ?? Container(),
-                ),
-                left: 0,
-                right: 0,
-                bottom: bottom,
-              )
-            ],
-          );
-        },
-      );
-      final entry = closeEntry;
-      if (entry != null) Overlay.of(context)?.insert(entry);
-    });
+    // Future.delayed(Duration.zero, () {
+    //   closeEntry = OverlayEntry(
+    //     builder: (ctx) {
+    //       final bottom = (MediaQuery.of(context).size.height -
+    //           widget.height -
+    //           widget.bodyMargin * 2) /
+    //           4 -
+    //           20;
+    //       return Stack(
+    //         clipBehavior: Clip.none,
+    //         children: <Widget>[
+    //           Positioned(
+    //             child: Container(
+    //               alignment: Alignment.center,
+    //               child: widget.options.close ?? Container(),
+    //             ),
+    //             left: 0,
+    //             right: 0,
+    //             bottom: bottom,
+    //           )
+    //         ],
+    //       );
+    //     },
+    //   );
+    //   final entry = closeEntry;
+    //   if (entry != null) Overlay.of(context)?.insert(entry);
+    // });
   }
 
   @override
@@ -259,13 +261,14 @@ class BeautifulPopupTemplateState extends State<BeautifulPopupTemplate> {
     return Column(
       mainAxisSize: MainAxisSize.min,
       mainAxisAlignment: MainAxisAlignment.center,
+      crossAxisAlignment: widget.options.crossAxisAlignment,
       children: <Widget>[
         Material(
           color: Colors.transparent,
           child: Container(
             margin: EdgeInsets.all(widget.bodyMargin),
-            height: widget.height,
-            width: widget.width,
+            // height: widget.height,
+            // width: widget.width,
             child: Stack(
               clipBehavior: Clip.none,
               children: widget.layout,

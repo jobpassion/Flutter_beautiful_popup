@@ -94,6 +94,7 @@ class BeautifulPopup {
   List<Widget>? actions;
   Widget? close;
   bool? barrierDismissible;
+  CrossAxisAlignment crossAxisAlignment = CrossAxisAlignment.center;
 
   Color? primaryColor;
 
@@ -164,12 +165,14 @@ class BeautifulPopup {
     List<Widget>? actions,
     bool barrierDismissible = false,
     Widget? close,
+    CrossAxisAlignment crossAxisAlignment = CrossAxisAlignment.center,
   }) {
     this.title = title;
     this.content = content;
     this.actions = actions;
     this.barrierDismissible = barrierDismissible;
     this.close = close ?? instance.close;
+    this.crossAxisAlignment = crossAxisAlignment;
     final child = WillPopScope(
       onWillPop: () {
         return Future.value(barrierDismissible);
@@ -177,6 +180,7 @@ class BeautifulPopup {
       child: instance,
     );
     return showGeneralDialog<T>(
+      useRootNavigator: false,
       barrierColor: Colors.black38,
       barrierDismissible: barrierDismissible,
       barrierLabel: barrierDismissible ? 'beautiful_popup' : null,
